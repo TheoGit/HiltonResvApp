@@ -1,6 +1,8 @@
 # HiltonResvApp assignment
 The React Native app I created utilizes the server service found in the HiltonServer system I created.
 
+* * * the node_modules folder was no uploaded, running "npm install" from the command line should install all dependencies
+
 Run "react-native run-ios" from the command line to run the app.
 
 The App is fairly straight forward, the home screen as 3 options
