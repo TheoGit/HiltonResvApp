@@ -1,6 +1,8 @@
 # HiltonResvApp assignment
 The React Native app I created utilizes the server service found in the HiltonServer system I created.
 
+Run "react-native run-ios" from the command line to run the app.
+
 The App is fairly straight forward, the home screen as 3 options
   1.  Create a reservation
   2.  View All reservations
