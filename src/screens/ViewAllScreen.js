@@ -1,34 +1,43 @@
-/**
- * @flow
- */
+/* @flow */
 
 import React from 'react';
 import {Alert, StyleSheet, FlatList, View, Text } from 'react-native';
 import {Button} from '../components/Button';
 import {ReservationRow} from '../components/ResvRow';
 import {getAllReservations, getAllReservationsGraphQl} from '../utils/fetchData';
+import {hiltonReservations} from './ReservationTypes';
+type Props = {};
+type State = {
+  showList: boolean,
+  reservations: hiltonReservations[],
+};
 
-export default class ViewAllScreen extends React.PureComponent {
+type RenderItemType = {
+  item: hiltonReservations,
+  index: number,
+};
+
+export default class ViewAllScreen extends React.PureComponent<Props, State> {
     static navigationOptions = {
       title: 'View All Reservations',
     };
 
-    constructor(props){
-      super(props)
-  
+    constructor(){
+      super();
+
       this.state = {
         showList: false,
-        reservations: [],
+        reservations: []
       }
     }
 
-    renderItem = ({item, index}) => {
+    renderItem = ({index, item}: {index: number, item: *}) => {
       return (
           <ReservationRow resv={item} index={index} />
       );
     };
     
-    keyExtractor = (item) => item.id.toString();
+    keyExtractor = (item: hiltonReservations) => item.id.toString();
 
     flatListItemSeparator = () => {
       return (
@@ -44,15 +53,15 @@ export default class ViewAllScreen extends React.PureComponent {
     };
 
     render() {
-      const {showList} = this.state.showList;
+      const {showList, reservations} = this.state;
       return (
         <View style={styles.container}>
-          {!this.state.showList ? (
+          {!showList ? (
             <Button onPress={this.onGetAllResvPress}>Get All Reservations</Button>
           ) : (
             <View style={styles.listContainer}>
                 <FlatList
-                      data={this.state.reservations}
+                      data={reservations}
                       keyExtractor={this.keyExtractor}
                       renderItem={this.renderItem}
                       ItemSeparatorComponent={this.flatListItemSeparator}
