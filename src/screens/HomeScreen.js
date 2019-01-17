@@ -1,12 +1,12 @@
-/**
- * @flow
- */
+/* @flow */
 
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from '../components/Button';
+import { NavigationScreenProps } from 'react-navigation';
+type Props = NavigationScreenProps & {};
 
-export default class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component<Props> {
   static navigationOptions = {
     title: 'Home',
   };
