@@ -1,20 +1,26 @@
-/**
- * @flow
- */
+/* @flow */
 
 import React from 'react';
 import {Alert, View, StyleSheet, TextInput, Text } from 'react-native';
 import {Button} from '../components/Button';
 import {createReservation} from '../utils/fetchData';
+type Props = {};
+type State = {
+    showRow: boolean,
+    guestName: string,
+    hotel: string,
+    arrivalDate: string,
+    departureDate: string,
+    hotelId: string
+}
 
-export default class CreateScreen extends React.Component {
+export default class CreateScreen extends React.Component<Props, State> {
     static navigationOptions = {
         title: 'Create Reservation',
     };
 
-    constructor(props){
-        super(props)
-    
+    constructor(){    
+        super();
         this.state = {
           showRow: false,
           guestName: '',
@@ -35,15 +41,17 @@ export default class CreateScreen extends React.Component {
         });      
     };
 
-    renderRow = (id) => {
+    renderRow = () => {
+        const {hotelId} = this.state;
         return (
             <View style={styles.rowContainer}>
-                <Text>Reservation created; please note hotel id: {this.state.hotelId}</Text>
+                <Text>Reservation created; please note hotel id: {hotelId}</Text>
             </View>
           );
     };
       
     render() {
+    const {showRow} = this.state;
     
     return (
       <View style={styles.container}>
@@ -62,9 +70,9 @@ export default class CreateScreen extends React.Component {
                     onChangeText={(text) => this.setState({departureDate:text})}/>
             </View>
             <View style={styles.buttonContainer}>
-                <Button onPress={this.onSavePress} buttonOff={this.state.showRow}>Save</Button>
+                <Button onPress={this.onSavePress} buttonOff={showRow}>Save</Button>
             </View>
-            {this.state.showRow && this.renderRow()}
+            {showRow && this.renderRow()}
       </View>
     );
   }
