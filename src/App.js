@@ -34,8 +34,9 @@ const RootStack = createStackNavigator(
 );
 
 const AppContainer = createAppContainer(RootStack);
+type Props = {};
 
-export default class App extends Component {
+export default class App extends Component<Props> {
   render() {
     return <AppContainer />
   }  
