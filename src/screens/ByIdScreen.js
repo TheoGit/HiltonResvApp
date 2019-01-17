@@ -1,29 +1,34 @@
-/**
- * @flow
- */
+/* @flow */
 
 import React from 'react';
 import {Alert, View, Text, TextInput, StyleSheet } from 'react-native';
 import {Button} from '../components/Button';
 import {ReservationRow} from '../components/ResvRow';
 import {getReservationsById} from '../utils/fetchData';
+import {hiltonReservations} from './ReservationTypes';
+type Props = {};
+type State = {
+  showRow: boolean,
+  reservation: hiltonReservations,
+  hotelId: string,
+};
 
-export default class ByIdScreen extends React.Component {
+export default class ByIdScreen extends React.Component<Props, State> {
     static navigationOptions = {
       title: 'Retrieve Reservation',
     };
 
-    constructor(props){
-      super(props)
+    constructor(){
+      super()
     
       this.state = {
           showRow: false,
-          reservation: {},
+          reservation: hiltonReservations,
           hotelId: '',
         }
     }
             
-    onTextChanged = (text) => {
+    onTextChanged = (text: string) => {
       let id = text.replace(/[^0-9]/g, '');
       if (id === '') { 
         Alert.alert('Reservations', 'please enter numeric value')
@@ -41,16 +46,18 @@ export default class ByIdScreen extends React.Component {
     };
 
     renderRow = () => {
+      const {reservation} = this.state;
       return (
-          <ReservationRow resv={this.state.reservation} index={0} />
+          <ReservationRow resv={reservation} index={0} />
       );
     };
    
     render() {
+    const {showRow} = this.state;
     
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {!this.state.showRow ? (
+        {!showRow ? (
           <View>
               <View style={styles.inputContainer}>
                 <Text style={styles.textLabel}>Hotel Id:</Text>
