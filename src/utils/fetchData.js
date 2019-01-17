@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 const serverURL = 'http://localhost:4000/graphql';
 const client = new ApolloClient({ uri: serverURL});
 
-export const getReservationsById = async (id) => {
+export const getReservationsById = async (id: number) => {
     return await client
         .query({
         query: gql `
